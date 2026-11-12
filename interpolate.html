@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Correction Worksheets — Certificate QR Decoder</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="theme.js"></script>
+  <script src="sidebar.js"></script>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0088b0" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Certificate QR" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <svg class="app-icon" width="20" height="20" viewBox="0 0 30 30" aria-hidden="true">
+            <g transform="translate(-1.6,1.2)" fill="var(--accent)"><path d="M0 0h30v4H0zM0 26h30v4H0zM0 0h4v30H0zM26 0h4v30h-4z"/><path d="M11 11h8v8h-8z"/></g>
+            <g transform="translate(1.6,-1.2)" fill="var(--err)"><path d="M0 0h30v4H0zM0 26h30v4H0zM0 0h4v30H0zM26 0h4v30h-4z"/><path d="M11 11h8v8h-8z"/></g>
+            <g fill="var(--text)"><path d="M0 0h30v4H0zM0 26h30v4H0zM0 0h4v30H0zM26 0h4v30h-4z"/><path d="M11 11h8v8h-8z"/></g>
+          </svg>
+          <span>Certificate QR</span>
+        </div>
+        <button type="button" class="sidebar-toggle" id="sidebar-toggle" title="Collapse sidebar" aria-label="Collapse sidebar">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="9" y1="4" x2="9" y2="20"></line></svg>
+        </button>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="sidebar-link" href="index.html" title="Home"><span class="sidebar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span><span class="sidebar-label">Home</span></a>
+        <a class="sidebar-link active" href="interpolate.html" title="Worksheet"><span class="sidebar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M3 20V4"/><polyline points="6,15 10,10 14,13 20,6"/></svg></span><span class="sidebar-label">Worksheet</span></a>
+        <a class="sidebar-link" href="database.html" title="Records"><span class="sidebar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span><span class="sidebar-label">Records</span></a>
+        <a class="sidebar-link" href="lablog.html" title="Lab Log"><span class="sidebar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span><span class="sidebar-label">Lab Log</span></a>
+        <a class="sidebar-link" href="scans.html" title="Scans"><span class="sidebar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5a1 1 0 0 1 1-1h3"/><path d="M17 4h3a1 1 0 0 1 1 1v3"/><path d="M21 16v3a1 1 0 0 1-1 1h-3"/><path d="M8 20H5a1 1 0 0 1-1-1v-3"/><rect x="9" y="9" width="6" height="6"/></svg></span><span class="sidebar-label">Scans</span></a>
+        <a class="sidebar-link" href="sharelog.html" title="Shared Log"><span class="sidebar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.7" x2="15.4" y2="6.3"/><line x1="8.6" y1="13.3" x2="15.4" y2="17.7"/></svg></span><span class="sidebar-label">Shared Log</span></a>
+        <a class="sidebar-link" href="converter.html" title="Converter"><span class="sidebar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h14"/><polyline points="14 4 18 8 14 12"/><path d="M20 16H6"/><polyline points="10 12 6 16 10 20"/></svg></span><span class="sidebar-label">Converter</span></a>
+        <a class="sidebar-link" href="settings.html" title="Settings"><span class="sidebar-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><circle cx="9" cy="6" r="2.5" fill="currentColor" stroke="none"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="16" cy="12" r="2.5" fill="currentColor" stroke="none"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="10" cy="18" r="2.5" fill="currentColor" stroke="none"/></svg></span><span class="sidebar-label">Settings</span></a>
+      </nav>
+    </aside>
+
+    <div class="page-content">
+      <header class="page-header">
+        <div class="mobile-brand">
+          <svg class="app-icon" width="18" height="18" viewBox="0 0 30 30" aria-hidden="true">
+            <g transform="translate(-1.6,1.2)" fill="var(--accent)"><path d="M0 0h30v4H0zM0 26h30v4H0zM0 0h4v30H0zM26 0h4v30h-4z"/><path d="M11 11h8v8h-8z"/></g>
+            <g transform="translate(1.6,-1.2)" fill="var(--err)"><path d="M0 0h30v4H0zM0 26h30v4H0zM0 0h4v30H0zM26 0h4v30h-4z"/><path d="M11 11h8v8h-8z"/></g>
+            <g fill="var(--text)"><path d="M0 0h30v4H0zM0 26h30v4H0zM0 0h4v30H0zM26 0h4v30h-4z"/><path d="M11 11h8v8h-8z"/></g>
+          </svg>
+          <span>Certificate QR</span>
+        </div>
+        <h1>Correction Worksheets</h1>
+      </header>
+
+      <main>
+        <section class="input-panel">
+          <div class="result-header">
+            <h2>Scan a certificate</h2>
+          </div>
+
+          <div id="scan-confirm" class="scan-confirm hidden">
+            <span class="scan-confirm-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 9 17 20 6"/></svg></span>
+            <span id="scan-confirm-text" class="scan-confirm-text"></span>
+            <button type="button" id="rescan-btn" class="rescan-btn">Rescan</button>
+          </div>
+
+          <div id="scan-controls">
+            <div class="input-tabs">
+              <button type="button" class="input-tab active" data-mode="upload">Upload image</button>
+              <button type="button" class="input-tab" data-mode="camera">Use camera</button>
+            </div>
+
+            <div class="input-mode" id="mode-upload">
+              <label class="dropzone" id="dropzone" for="file-input">
+                <span class="dropzone-icon">⇪</span>
+                <span>Drop a QR code image here, or click to choose a file</span>
+              </label>
+              <input type="file" id="file-input" accept="image/*" hidden />
+            </div>
+
+            <div class="input-mode hidden" id="mode-camera">
+              <!-- Camera scanner (scanner.js). data-state on the stage —
+                   idle | starting | running | error — decides which of
+                   the layers below is showing, and (starting/running)
+                   that the stage covers the whole page; see style.css. -->
+              <div class="scanner" id="scanner">
+                <div class="scanner-stage" data-role="stage" data-state="idle">
+                  <video class="scanner-video" data-role="video" playsinline muted></video>
+                  <div class="scanner-highlight hidden" data-role="highlight"></div>
+
+                  <div class="scanner-frame" data-role="frame" aria-hidden="true">
+                    <span class="scanner-corner scanner-corner-tl"></span>
+                    <span class="scanner-corner scanner-corner-tr"></span>
+                    <span class="scanner-corner scanner-corner-bl"></span>
+                    <span class="scanner-corner scanner-corner-br"></span>
+                    <span class="scanner-line"></span>
+                  </div>
+
+                  <div class="scanner-zoom-badge hidden" data-role="zoom-badge"></div>
+                  <div class="scanner-hint hidden" data-role="hint" role="status"></div>
+
+                  <button type="button" class="scanner-btn scanner-stop" data-role="stop" title="Stop camera" aria-label="Stop camera">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+                  </button>
+                  <button type="button" class="scanner-btn scanner-torch hidden" data-role="torch" title="Torch" aria-label="Torch" aria-pressed="false">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8l-1.5 5h-5z"/><path d="M9.5 8v11a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V8"/><line x1="12" y1="12" x2="12" y2="15"/></svg>
+                  </button>
+
+                  <div class="scanner-overlay scanner-overlay-idle">
+                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V5a1 1 0 0 1 1-1h3"/><path d="M16 4h3a1 1 0 0 1 1 1v3"/><path d="M20 16v3a1 1 0 0 1-1 1h-3"/><path d="M8 20H5a1 1 0 0 1-1-1v-3"/><line x1="4" y1="12" x2="20" y2="12"/></svg>
+                    <button type="button" class="scanner-start-btn" data-role="start">Start camera</button>
+                    <p>Opens the camera full page. Point it at the certificate's QR code — it closes by itself once the code is read.</p>
+                  </div>
+                  <div class="scanner-overlay scanner-overlay-starting">
+                    <p>Starting camera…</p>
+                  </div>
+                  <div class="scanner-overlay scanner-overlay-error" role="alert">
+                    <strong data-role="error-title"></strong>
+                    <p data-role="error-text"></p>
+                    <button type="button" class="scanner-start-btn" data-role="start">Try again</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <canvas id="scan-canvas" hidden></canvas>
+
+            <p id="scan-status" class="camera-note hidden"></p>
+          </div>
+        </section>
+
+        <!-- Customer folders (interpolate.js): the tab strip below shows
+             the worksheets of whichever folder is chosen here. -->
+        <div class="customer-bar">
+          <label for="customer-select">Customer folder</label>
+          <select id="customer-select"></select>
+          <button type="button" id="customer-add" class="customer-add-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> New folder</button>
+          <button type="button" id="customer-rename" class="history-item-btn" title="Rename folder" aria-label="Rename folder"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16Z"/><line x1="13" y1="7" x2="17" y2="11"/></svg></button>
+          <button type="button" id="customer-delete" class="history-item-btn history-item-btn-danger" title="Delete folder" aria-label="Delete folder"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"/><path d="M19 6l-1 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1L5 6"/><line x1="10" y1="11" x2="10" y2="16"/><line x1="14" y1="11" x2="14" y2="16"/></svg></button>
+        </div>
+
+        <div class="tab-strip">
+          <div class="tab-strip-tabs" id="tab-strip-tabs"></div>
+          <button type="button" id="add-tab-btn" class="tab-add-btn" title="Add a worksheet to this folder" aria-label="Add a worksheet to this folder">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+        </div>
+        <div id="tab-panels"></div>
+      </main>
+    </div>
+
+    <nav class="bottom-nav">
+      <a class="bottom-nav-item" href="index.html">
+        <span class="bottom-nav-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span>
+        <span class="bottom-nav-label">Home</span>
+      </a>
+      <a class="bottom-nav-item active" href="interpolate.html">
+        <span class="bottom-nav-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M3 20V4"/><polyline points="6,15 10,10 14,13 20,6"/></svg></span>
+        <span class="bottom-nav-label">Worksheet</span>
+      </a>
+      <a class="bottom-nav-item" href="database.html">
+        <span class="bottom-nav-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>
+        <span class="bottom-nav-label">Records</span>
+      </a>
+      <a class="bottom-nav-item" href="lablog.html">
+        <span class="bottom-nav-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span>
+        <span class="bottom-nav-label">Lab Log</span>
+      </a>
+      <!-- The pages that don't fit on the bar: a menu that opens above it
+           (sidebar.js). Lit when the page being shown is one of them. -->
+      <button type="button" class="bottom-nav-item bottom-nav-more" id="bottom-more-btn" aria-expanded="false" aria-controls="bottom-more-menu">
+        <span class="bottom-nav-icon"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></svg></span>
+        <span class="bottom-nav-label">More</span>
+      </button>
+      <div class="bottom-more-menu hidden" id="bottom-more-menu">
+        <a class="bottom-more-link" href="scans.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5a1 1 0 0 1 1-1h3"/><path d="M17 4h3a1 1 0 0 1 1 1v3"/><path d="M21 16v3a1 1 0 0 1-1 1h-3"/><path d="M8 20H5a1 1 0 0 1-1-1v-3"/><rect x="9" y="9" width="6" height="6"/></svg><span>Scans</span></a>
+        <a class="bottom-more-link" href="sharelog.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.7" x2="15.4" y2="6.3"/><line x1="8.6" y1="13.3" x2="15.4" y2="17.7"/></svg><span>Shared Log</span></a>
+        <a class="bottom-more-link" href="converter.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h14"/><polyline points="14 4 18 8 14 12"/><path d="M20 16H6"/><polyline points="10 12 6 16 10 20"/></svg><span>Converter</span></a>
+        <a class="bottom-more-link" href="settings.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><circle cx="9" cy="6" r="2.5" fill="currentColor" stroke="none"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="16" cy="12" r="2.5" fill="currentColor" stroke="none"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="10" cy="18" r="2.5" fill="currentColor" stroke="none"/></svg><span>Settings</span></a>
+      </div>
+    </nav>
+  </div>
+
+  <template id="tab-panel-template">
+    <div class="tab-panel">
+      <!-- Each section folds away under its heading (interpolate.js's
+           setUpFold): data-section names it, and the heading's button
+           and summary are what the folding works. -->
+      <!-- Which of the official worksheets this is (worksheet-forms.js).
+           Only there when Settings has the page set to "Worksheet". -->
+      <div class="entry-form-row worksheet-type-row hidden" data-role="type-row">
+        <label>Type of worksheet</label>
+        <select data-role="worksheet-type"></select>
+      </div>
+
+      <section class="input-panel" data-section="reference">
+        <div class="result-header">
+          <h2 class="fold-heading"><button type="button" class="section-toggle" data-role="fold" aria-expanded="true" title="Fold or unfold this section" aria-label="Fold or unfold Calibration info"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><span>Calibration info</span><span data-role="fold-summary" class="section-summary"></span></h2>
+        </div>
+        <dl class="info-dl">
+          <div class="info-dl-row">
+            <dt>Equipment ID</dt>
+            <dd>
+              <select data-role="equipment-select">
+                <option value="">— Select —</option>
+              </select>
+            </dd>
+          </div>
+          <div class="info-dl-row">
+            <dt>Description</dt>
+            <dd data-role="equipment-desc">—</dd>
+          </div>
+          <!-- One line per certificate held for the equipment: which of
+               them a reading is corrected by is picked in each table. -->
+          <div class="info-dl-row">
+            <dt>Certificates</dt>
+            <dd data-role="equipment-certs">—</dd>
+          </div>
+        </dl>
+        <p data-role="no-scans-note" class="camera-note hidden">
+          No scans yet — use the scanner above to add one.
+        </p>
+      </section>
+
+      <section class="input-panel" data-section="uut">
+        <div class="result-header">
+          <h2 class="fold-heading"><button type="button" class="section-toggle" data-role="fold" aria-expanded="true" title="Fold or unfold this section" aria-label="Fold or unfold UUT info"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><span>UUT info</span><span data-role="fold-summary" class="section-summary"></span></h2>
+        </div>
+        <div class="entry-form-grid">
+          <div class="entry-form-row">
+            <label>UUT Model</label>
+            <input type="text" data-role="uut-model" placeholder="e.g. Fluke 754" />
+          </div>
+          <div class="entry-form-row">
+            <label>UUT Serial No.</label>
+            <input type="text" data-role="uut-serial" placeholder="e.g. 12345678" />
+          </div>
+        </div>
+        <div class="entry-form-grid">
+          <div class="entry-form-row">
+            <label>Tag No.</label>
+            <input type="text" data-role="uut-tag" placeholder="e.g. PT-101" />
+          </div>
+          <div class="entry-form-row">
+            <label>Maker</label>
+            <input type="text" data-role="uut-maker" placeholder="e.g. Fluke" />
+          </div>
+        </div>
+        <div class="entry-form-grid">
+          <div class="entry-form-row">
+            <label>Range</label>
+            <input type="text" data-role="uut-range" placeholder="e.g. 0 to 10 bar" />
+          </div>
+          <div class="entry-form-row">
+            <label>SR (Scale Resolution)</label>
+            <input type="text" inputMode="decimal" data-role="uut-resolution" placeholder="e.g. 0.01" />
+          </div>
+        </div>
+      </section>
+
+      <section class="input-panel" data-section="details">
+        <div class="result-header">
+          <h2 class="fold-heading"><button type="button" class="section-toggle" data-role="fold" aria-expanded="true" title="Fold or unfold this section" aria-label="Fold or unfold Calibration details"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><span>Calibration details</span><span data-role="fold-summary" class="section-summary"></span></h2>
+        </div>
+        <div class="entry-form-grid">
+          <div class="entry-form-row">
+            <label>Calibration date</label>
+            <input type="date" data-role="cal-date" />
+          </div>
+          <div class="entry-form-row">
+            <label>Technician</label>
+            <input type="text" data-role="technician" placeholder="Who did the calibration" />
+          </div>
+        </div>
+        <div class="entry-form-grid">
+          <div class="entry-form-row">
+            <label>Ambient temperature (°C)</label>
+            <input type="text" inputMode="decimal" data-role="ambient-temp" placeholder="e.g. 23.5" />
+          </div>
+          <div class="entry-form-row">
+            <label>Humidity (%RH)</label>
+            <input type="text" inputMode="decimal" data-role="ambient-humidity" placeholder="e.g. 55" />
+          </div>
+        </div>
+      </section>
+
+      <!-- The worksheet's reading tables — clones of
+           #reading-table-template below, one per table (interpolate.js's
+           createReadingTable). -->
+      <!-- Which table is showing: a worksheet's tables are side by side
+           and swiped between (interpolate.js). -->
+      <div class="table-pager hidden" data-role="table-pager">
+        <button type="button" class="history-item-btn" data-role="pager-prev" title="Previous table" aria-label="Previous table"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 6 9 12 15 18"/></svg></button>
+        <div class="table-pager-middle">
+          <span class="table-pager-label" data-role="pager-label" role="status"></span>
+          <span class="table-pager-dots" data-role="pager-dots"></span>
+        </div>
+        <button type="button" class="history-item-btn" data-role="pager-next" title="Next table" aria-label="Next table"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button>
+      </div>
+      <div class="reading-tables" data-role="tables"></div>
+      <div class="reading-tables-footer">
+        <button type="button" data-role="add-table" class="customer-add-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add a table</button>
+        <p class="interp-note">UUT Rdg accepts more than one reading (separate with commas, spaces, or "/") — they're averaged before computing Correction Rdg = Act Lab Rdg − Avg UUT Rdg.</p>
+      </div>
+
+      <section class="input-panel" data-section="remarks">
+        <div class="result-header">
+          <h2 class="fold-heading"><button type="button" class="section-toggle" data-role="fold" aria-expanded="true" title="Fold or unfold this section" aria-label="Fold or unfold Remarks"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><span>Remarks</span><span data-role="fold-summary" class="section-summary"></span></h2>
+        </div>
+        <div class="entry-form-row remarks-row">
+          <textarea data-role="remarks" rows="3" aria-label="Remarks" placeholder="Anything worth noting about this job — e.g. UUT adjusted at zero, display flickers above 80 bar"></textarea>
+        </div>
+      </section>
+
+      <!-- Stays in view at the foot of the page while the worksheet is
+           scrolled (style.css), so saving is never a scroll away. -->
+      <div class="tab-save-bar">
+        <span data-role="result-chip" class="result-chip hidden" role="status"></span>
+        <button type="button" data-role="save-btn" class="tab-save-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11l3 3v13H5Z"/><path d="M8 4v5h8V4"/><path d="M8 14h8v6H8Z"/></svg> <span data-role="save-label">Save worksheet</span></button>
+        <button type="button" data-role="save-new-btn" class="text-btn hidden">Save as a new record</button>
+        <span data-role="save-status" class="tab-save-status hidden"></span>
+      </div>
+    </div>
+  </template>
+
+  <!-- One table of readings inside a worksheet: which of the equipment's
+       scope/unit tables it's read against, the unit the UUT shows, and
+       whether the readings are from before or after adjustment. -->
+  <template id="reading-table-template">
+    <section class="result-panel reading-table">
+      <div class="result-header">
+        <h2 class="fold-heading"><button type="button" class="section-toggle" data-role="fold" aria-expanded="true" title="Fold or unfold this table" aria-label="Fold or unfold this table"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg></button><span data-role="table-title">Table</span><span data-role="stage-chip" class="stage-chip hidden"></span><span data-role="fold-summary" class="section-summary"></span></h2>
+        <div class="result-header-actions">
+          <button type="button" data-role="add-row" class="add-row-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add a reading</button>
+          <button type="button" data-role="remove-table" class="history-item-btn history-item-btn-danger hidden" title="Remove this table" aria-label="Remove this table"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"/><path d="M19 6l-1 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1L5 6"/><line x1="10" y1="11" x2="10" y2="16"/><line x1="14" y1="11" x2="14" y2="16"/></svg></button>
+        </div>
+      </div>
+
+      <div class="reading-table-setup">
+       <div class="entry-form-grid">
+        <div class="entry-form-row">
+          <label>Certificate</label>
+          <select data-role="cert-select" disabled>
+            <option value="">— Select equipment first —</option>
+          </select>
+        </div>
+        <div class="entry-form-row">
+          <label>Scope / unit table</label>
+          <select data-role="table-select" disabled>
+            <option value="">— Select equipment first —</option>
+          </select>
+        </div>
+        <div class="entry-form-row hidden" data-role="uut-unit-row">
+          <label>UUT unit</label>
+          <select data-role="uut-unit-select" disabled>
+            <option value="">— Select a scope/unit table first —</option>
+          </select>
+          <p data-role="uut-unit-note" class="camera-note hidden">Unit conversion isn't available for this table's unit — Lab Rdg is used as recorded on the certificate.</p>
+        </div>
+        <div class="entry-form-row stage-row">
+          <span class="stage-row-label">Readings taken</span>
+          <div class="stage-checks">
+            <label class="stage-check"><input type="checkbox" data-role="stage-before" /> Before adjust</label>
+            <label class="stage-check"><input type="checkbox" data-role="stage-after" /> After adjust</label>
+          </div>
+        </div>
+       </div>
+       <!-- The function under test, for the worksheets that have a
+            table per function (F33). -->
+       <div class="entry-form-row hidden" data-role="fn-row">
+         <label>Function</label>
+         <input type="text" data-role="fn" placeholder="e.g. DC voltage simulation" />
+       </div>
+       <!-- This table's accuracy: its readings are judged against it,
+            and another table of the same worksheet can have another. -->
+       <div class="entry-form-grid">
+        <div class="entry-form-row">
+          <label>Accuracy</label>
+          <select data-role="tol-type">
+            <option value="pct_rdg_add">± % rdg + fixed</option>
+            <option value="pct_fs_add">± % FS + fixed</option>
+            <option value="fixed" selected>± fixed</option>
+          </select>
+        </div>
+        <div class="entry-form-row" data-role="tol-pct-row">
+          <label>Percent (%)</label>
+          <input type="text" inputMode="decimal" data-role="tol-pct" placeholder="e.g. 0.5" />
+        </div>
+        <div class="entry-form-row hidden" data-role="tol-fs-row">
+          <label>Full scale</label>
+          <input type="text" inputMode="decimal" data-role="tol-fs" placeholder="e.g. 1000" />
+        </div>
+        <div class="entry-form-row" data-role="tol-add-row">
+          <label>Fixed</label>
+          <input type="text" inputMode="decimal" data-role="tol-add" placeholder="e.g. 0.1" />
+        </div>
+       </div>
+      </div>
+
+      <div class="interp-table-wrap">
+        <table class="data-table interp-table">
+          <thead>
+            <tr>
+              <th data-role="lab-rdg-header">Lab Rdg</th>
+              <th>Lab Correction Rdg</th>
+              <th>Act Lab Rdg</th>
+              <th data-role="uut-rdg-header">UUT Rdg</th>
+              <th>Correction Rdg</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody data-role="interp-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+  </template>
+
+  <script src="history.js"></script>
+  <script src="version.js"></script>
+  <script src="github-token.js"></script>
+  <script src="updater.js"></script>
+  <script src="photos.js"></script>
+  <script src="vendor/jsQR.js"></script>
+  <script src="vendor/zxing-reader.js"></script>
+  <script src="qr-decode.js"></script>
+  <script src="vendor/pako_inflate.min.js"></script>
+  <script src="worksheet-forms.js"></script>
+  <script src="dictionary.js"></script>
+  <script src="scanner.js"></script>
+  <script src="interpolate.js"></script>
+  <script src="web-app.js"></script>
+</body>
+</html>

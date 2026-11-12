@@ -1,0 +1,2990 @@
+/* Themes. Every colour below this block — and a few matters of shape —
+   is read from these variables, so a theme is nothing more than a set
+   of values for them. Two attributes on <html> choose the set, both put
+   there by theme.js before first paint (the whole app needs JS to work
+   at all, so there is no no-JS look to preserve):
+     data-palette — which theme: classic (also what applies with no
+       attribute), claude, forest, ocean, honey or cinema;
+     data-theme — its light half or its dark half.
+   The selectors match any element carrying data-palette, not only
+   <html>: the Settings page previews each theme by putting the
+   attribute on a small sample of it (settings.js). That is also why
+   every block sets every colour, --line and --heading-rule included
+   though they only point at other variables: a variable that points at
+   another is worked out where it is set, not where it is used.
+
+   What they are for:
+     --bg, --panel, --border     the page, its cards and inputs, hairlines
+     --line                      the strong rule: over a card, round a
+                                 menu, under a table's headings
+     --heading-rule              the bar over a page's title
+     --text, --text-muted
+     --accent                    links, active states, outlines — kept
+                                 readable as text on --bg, --panel and
+                                 --accent-soft
+     --accent-soft               the fill behind an active state
+     --accent-fill, --on-accent  a filled button, and the text on it
+     --ok, --warn, --err         status text, each with a -bg to sit on
+     --panel-shadow              lift under a card, in a theme that has it
+     --radius                    how round corners are
+     --font-body                 the reading face
+     --scan-accent(-soft)        the accent on the camera scanner, whose
+                                 stage is dark in every theme */
+
+/* Classic — ink on paper, and what the app looked like before there
+   was a choice: teal accent, magenta for errors, warm paper neutrals,
+   square corners, serif. */
+:root,
+[data-palette="classic"] {
+  --radius: 2px;
+  --font-body: Georgia, "Times New Roman", serif;
+  --scan-accent: #62c5ee;
+  --scan-accent-soft: rgba(98, 197, 238, 0.16);
+
+  --bg: #f3f2f2;
+  --panel: #eae9e9;
+  --border: #d9d6d5;
+  --line: var(--text);
+  --heading-rule: var(--text);
+  --text: #201e1d;
+  --text-muted: #7d7979;
+  --accent: #0088b0;
+  --accent-soft: #e9f8ff;
+  --accent-fill: #0088b0;
+  --on-accent: #fff;
+  --ok: #1a7f4b;
+  --ok-bg: #e6f6ee;
+  --warn: #8a5a00;
+  --warn-bg: #f6ecd6;
+  --err: #aa0b56;
+  --err-bg: #fff1f4;
+  --panel-shadow: none;
+}
+:root[data-theme="dark"],
+[data-theme="dark"] [data-palette="classic"] {
+  --bg: #201e1d;
+  --panel: #2d2b2b;
+  --border: #444141;
+  --line: var(--text);
+  --heading-rule: var(--text);
+  --text: #f3f2f2;
+  --text-muted: #9b9797;
+  --accent: #62c5ee;
+  --accent-soft: #0a303e;
+  --accent-fill: #62c5ee;
+  --on-accent: #0b222c;
+  --ok: #5fd39a;
+  --ok-bg: #16332a;
+  --warn: #f0c26e;
+  --warn-bg: #3a2f10;
+  --err: #ff90b1;
+  --err-bg: #4b1528;
+  --panel-shadow: none;
+}
+
+/* Claude — warm ivory and terracotta, soft rules, rounded corners,
+   serif. */
+[data-palette="claude"] {
+  --radius: 8px;
+  --font-body: Georgia, "Times New Roman", serif;
+  --scan-accent: #e08a6c;
+  --scan-accent-soft: rgba(224, 138, 108, 0.18);
+
+  --bg: #faf9f5;
+  --panel: #f0eee6;
+  --border: #dcd9cc;
+  --line: var(--border);
+  --heading-rule: var(--accent-fill);
+  --text: #1f1e1d;
+  --text-muted: #65635b;
+  --accent: #a84b27;
+  --accent-soft: #f7e2d6;
+  --accent-fill: #bb5a38;
+  --on-accent: #fff;
+  --ok: #3c6b2c;
+  --ok-bg: #e2edd3;
+  --warn: #855300;
+  --warn-bg: #f7e7c2;
+  --err: #a3123f;
+  --err-bg: #fbe3e6;
+  --panel-shadow: none;
+}
+[data-palette="claude"][data-theme="dark"],
+[data-theme="dark"] [data-palette="claude"] {
+  --bg: #262624;
+  --panel: #30302e;
+  --border: #4b4a45;
+  --line: var(--border);
+  --heading-rule: var(--accent-fill);
+  --text: #faf9f5;
+  --text-muted: #b0aea5;
+  --accent: #e08a6c;
+  --accent-soft: #45291e;
+  --accent-fill: #d97757;
+  --on-accent: #1a1918;
+  --ok: #9cc98a;
+  --ok-bg: #26361f;
+  --warn: #e9bf6a;
+  --warn-bg: #3d3012;
+  --err: #f594a6;
+  --err-bg: #4a1c26;
+  --panel-shadow: none;
+}
+
+/* Forest — evergreen on sage paper, with the ink rules kept, in deep
+   green. */
+[data-palette="forest"] {
+  --radius: 6px;
+  --font-body: Georgia, "Times New Roman", serif;
+  --scan-accent: #84d19d;
+  --scan-accent-soft: rgba(132, 209, 157, 0.18);
+
+  --bg: #f2f5ee;
+  --panel: #e6ecdf;
+  --border: #cad5c0;
+  --line: var(--text);
+  --heading-rule: var(--accent);
+  --text: #18261d;
+  --text-muted: #556557;
+  --accent: #2a6642;
+  --accent-soft: #d3e8d6;
+  --accent-fill: #2a6642;
+  --on-accent: #fff;
+  --ok: #116a3c;
+  --ok-bg: #c9ecd4;
+  --warn: #7d5200;
+  --warn-bg: #f3e6bd;
+  --err: #a30f4d;
+  --err-bg: #fbe4ea;
+  --panel-shadow: none;
+}
+[data-palette="forest"][data-theme="dark"],
+[data-theme="dark"] [data-palette="forest"] {
+  --bg: #131a15;
+  --panel: #1c261f;
+  --border: #36463a;
+  --line: var(--text);
+  --heading-rule: var(--accent);
+  --text: #e8efe5;
+  --text-muted: #9aab9c;
+  --accent: #84d19d;
+  --accent-soft: #1b3a27;
+  --accent-fill: #84d19d;
+  --on-accent: #0f2416;
+  --ok: #6fdc9c;
+  --ok-bg: #143a25;
+  --warn: #edc46c;
+  --warn-bg: #3a3010;
+  --err: #ff93b3;
+  --err-bg: #4a1628;
+  --panel-shadow: none;
+}
+
+/* Ocean — deep-sea blue on cool, blue-grey water; rounded, sans-serif. */
+[data-palette="ocean"] {
+  --radius: 8px;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+  --scan-accent: #63c3f1;
+  --scan-accent-soft: rgba(99, 195, 241, 0.18);
+
+  --bg: #eff5f9;
+  --panel: #e2ecf3;
+  --border: #c4d5e2;
+  --line: var(--border);
+  --heading-rule: var(--accent);
+  --text: #0f2338;
+  --text-muted: #4f647a;
+  --accent: #0a5f9e;
+  --accent-soft: #d3e8f9;
+  --accent-fill: #0a5f9e;
+  --on-accent: #fff;
+  --ok: #0f6f58;
+  --ok-bg: #cdeee3;
+  --warn: #825400;
+  --warn-bg: #f6e8c6;
+  --err: #a80f52;
+  --err-bg: #fbe4ec;
+  --panel-shadow: none;
+}
+[data-palette="ocean"][data-theme="dark"],
+[data-theme="dark"] [data-palette="ocean"] {
+  --bg: #0c1724;
+  --panel: #142233;
+  --border: #2c425c;
+  --line: var(--border);
+  --heading-rule: var(--accent);
+  --text: #e4edf6;
+  --text-muted: #93a8bf;
+  --accent: #63c3f1;
+  --accent-soft: #103652;
+  --accent-fill: #63c3f1;
+  --on-accent: #06202f;
+  --ok: #5fd6b4;
+  --ok-bg: #103a33;
+  --warn: #f0c56e;
+  --warn-bg: #3b3012;
+  --err: #ff93b4;
+  --err-bg: #4a172c;
+  --panel-shadow: none;
+}
+
+/* Honey — gold on cream. The gold is for filling things in; amber-brown
+   stands in for it wherever the accent is text. Warnings move off to
+   burnt orange so they can still be told from it, and errors to magenta
+   so they can still be told from the warnings. */
+[data-palette="honey"] {
+  --radius: 12px;
+  --font-body: Georgia, "Times New Roman", serif;
+  --scan-accent: #f0bf4c;
+  --scan-accent-soft: rgba(240, 191, 76, 0.18);
+
+  --bg: #fcf7ea;
+  --panel: #f6ecd2;
+  --border: #e2d0a2;
+  --line: var(--border);
+  --heading-rule: var(--accent-fill);
+  --text: #2e220d;
+  --text-muted: #6f5d39;
+  --accent: #855200;
+  --accent-soft: #fbe3a0;
+  --accent-fill: #f2b632;
+  --on-accent: #2e1f00;
+  --ok: #3a6a1c;
+  --ok-bg: #deecc0;
+  --warn: #a3440a;
+  --warn-bg: #fbdcc4;
+  --err: #a00f5c;
+  --err-bg: #fbdcec;
+  --panel-shadow: none;
+}
+[data-palette="honey"][data-theme="dark"],
+[data-theme="dark"] [data-palette="honey"] {
+  --bg: #1c170f;
+  --panel: #272015;
+  --border: #4c3f27;
+  --line: var(--border);
+  --heading-rule: var(--accent-fill);
+  --text: #f6eedc;
+  --text-muted: #b5a686;
+  --accent: #f0bf4c;
+  --accent-soft: #3d300e;
+  --accent-fill: #f0bf4c;
+  --on-accent: #261b00;
+  --ok: #a5d27c;
+  --ok-bg: #27371a;
+  --warn: #ff9d5c;
+  --warn-bg: #45240f;
+  --err: #ff8fc4;
+  --err-bg: #4a1538;
+  --panel-shadow: none;
+}
+
+/* Cinema — the look of a streaming site: neutral greys, white cards
+   with a little lift under them, one red accent, rounded, sans-serif. */
+[data-palette="cinema"] {
+  --radius: 10px;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+  --scan-accent: #ff6b66;
+  --scan-accent-soft: rgba(255, 107, 102, 0.18);
+
+  --bg: #fafafa;
+  --panel: #ffffff;
+  --border: #e4e4ea;
+  --line: var(--border);
+  --heading-rule: var(--accent-fill);
+  --text: #18181b;
+  --text-muted: #5c5c66;
+  --accent: #c62a25;
+  --accent-soft: #fff1f0;
+  --accent-fill: #d8302b;
+  --on-accent: #fff;
+  --ok: #17794a;
+  --ok-bg: #e3f5eb;
+  --warn: #8a5a00;
+  --warn-bg: #f8edd3;
+  --err: #a40f6b;
+  --err-bg: #fdeaf5;
+  --panel-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 6px 20px rgba(0, 0, 0, 0.04);
+}
+[data-palette="cinema"][data-theme="dark"],
+[data-theme="dark"] [data-palette="cinema"] {
+  --bg: #0f0f0f;
+  --panel: #1c1c1f;
+  --border: #303036;
+  --line: var(--border);
+  --heading-rule: var(--accent-fill);
+  --text: #f1f1f3;
+  --text-muted: #b2b2ba;
+  --accent: #ff6b66;
+  --accent-soft: #3b1a1b;
+  --accent-fill: #d8302b;
+  --on-accent: #fff;
+  --ok: #5fd39a;
+  --ok-bg: #14342a;
+  --warn: #f0c26e;
+  --warn-bg: #3a2f10;
+  --err: #f58ad2;
+  --err-bg: #45163a;
+  --panel-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  align-items: flex-start;
+}
+
+.sidebar {
+  width: 244px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background: var(--panel);
+  border-right: 1px solid var(--line);
+  padding: 22px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  transition: width 0.15s ease;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0 8px;
+  min-width: 0;
+}
+/* Ellipsis lives on the text span, not the flex container itself — an
+   overflow:hidden container that a flex-sibling (the toggle button) can
+   squeeze would clip the icon along with the text, not just truncate it. */
+.sidebar-brand span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-icon {
+  flex-shrink: 0;
+  display: block;
+}
+
+/* Mobile-only brand row — the sidebar (where the brand normally lives)
+   is hidden below 760px in favor of the bottom nav, so each page's own
+   header carries a small icon + wordmark instead. Desktop keeps a
+   single "Certificate QR" instance, in the sidebar. */
+.mobile-brand {
+  display: none;
+}
+@media (max-width: 760px) {
+  .mobile-brand {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+}
+
+.sidebar-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.sidebar-toggle:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.sidebar-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sidebar-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-link:hover {
+  background: var(--bg);
+}
+
+.sidebar-link.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* Collapsed sidebar — icon-only rail. Set on <html> by sidebar.js
+   before first paint (same pattern as theme.js's data-theme) so there's
+   no flash of the expanded sidebar snapping shut on load. */
+:root[data-sidebar-collapsed] .sidebar {
+  width: 68px;
+}
+:root[data-sidebar-collapsed] .sidebar-header {
+  justify-content: center;
+}
+/* Collapsed rail keeps the app icon (a small logo makes sense even
+   icon-only) but drops the wordmark next to it and every nav label. */
+:root[data-sidebar-collapsed] .sidebar-brand span,
+:root[data-sidebar-collapsed] .sidebar-label {
+  display: none;
+}
+:root[data-sidebar-collapsed] .sidebar-brand {
+  padding: 0;
+  justify-content: center;
+}
+:root[data-sidebar-collapsed] .sidebar-link {
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.page-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.page-header {
+  padding: 28px 32px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-header h1 {
+  margin: 0 0 6px;
+  font-size: 1.9rem;
+  border-top: 4px solid var(--heading-rule);
+  padding-top: 10px;
+  display: inline-block;
+}
+
+.subtitle {
+  margin: 0;
+  max-width: 760px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0;
+  padding: 0 32px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Bottom nav — mobile-only replacement for the sidebar (a phone held in
+   one hand can't reach a left rail comfortably). Markup is present on
+   every page at every width; this rule keeps it off-screen until the
+   mobile breakpoint below turns it on and hides the sidebar instead. */
+.bottom-nav {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .app-shell {
+    flex-direction: column;
+  }
+  .sidebar {
+    display: none;
+  }
+  /* Stacked, .app-shell's align-items: flex-start would size this to
+     its content instead of the screen — so one wide table (which is
+     meant to scroll inside its own wrapper) widened the whole page. */
+  .page-content {
+    width: 100%;
+  }
+  .page-header, main {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  main {
+    /* Clears the fixed bottom nav so the last card isn't hidden under it. */
+    padding-bottom: 84px;
+  }
+
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    border-top: 1px solid var(--line);
+    background: var(--panel);
+    padding-bottom: max(4px, env(safe-area-inset-bottom));
+  }
+  .bottom-nav-item {
+    flex: 1;
+    min-width: 0;
+    min-height: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding-top: 6px;
+    border-top: 3px solid transparent;
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+  .bottom-nav-item.active {
+    color: var(--accent);
+    border-top-color: var(--accent);
+  }
+  /* More is a button among links: the same look, minus a button's own. */
+  .bottom-nav-more {
+    background: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    font: inherit;
+    cursor: pointer;
+  }
+  .bottom-more-menu {
+    position: absolute;
+    right: 8px;
+    bottom: calc(100% + 8px);
+    min-width: 210px;
+    display: flex;
+    flex-direction: column;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+  }
+  .bottom-more-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 50px;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .bottom-more-link:last-child { border-bottom: none; }
+  .bottom-more-link svg { color: var(--text-muted); flex-shrink: 0; }
+  .bottom-more-link.active { color: var(--accent); background: var(--accent-soft); }
+  .bottom-more-link.active svg { color: var(--accent); }
+  .bottom-nav-icon {
+    display: flex;
+  }
+  /* Five items across a 360px-wide phone: the four pages used most,
+     and More for the rest. */
+  .bottom-nav-label {
+    font-size: 9px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+}
+
+/* Customer folder picker (interpolate.js) — sits over the tab strip,
+   whose worksheets are the chosen folder's. */
+.customer-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.customer-bar label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.customer-bar select {
+  flex: 1 1 180px;
+  min-width: 0;
+  max-width: 420px;
+  min-height: 44px;
+  padding: 9px 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+.customer-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.customer-bar .history-item-btn:disabled { opacity: 0.4; cursor: default; }
+@media (max-width: 760px) {
+  .customer-bar label { flex-basis: 100%; }
+}
+
+.tab-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tab-strip-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tab-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 10px 8px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.tab-chip.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.tab-chip-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  margin: -4px -6px -4px 0;
+  border-radius: var(--radius);
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.7;
+}
+.tab-chip-close:hover { opacity: 1; color: var(--err); }
+
+.tab-add-btn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  border: 1px dashed var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.tab-add-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.tab-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.tab-panel.hidden { display: none; }
+
+.input-panel, .result-panel, .error-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--panel-shadow);
+  padding: 18px;
+}
+
+.input-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.input-tab {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.input-tab.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.input-mode.hidden { display: none; }
+/* !important, deliberately: a generic "hidden" utility has to win over
+   every component's own `display` rule regardless of specificity or
+   source order — we've hit that exact bug twice now (.scan-confirm,
+   and the tolerance rows below), each only patched by adding a more
+   specific .hidden combinator for that one component. This is the
+   textbook case !important exists for. */
+.hidden { display: none !important; }
+
+.entry-form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.entry-form-row label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.entry-form-row select,
+.entry-form-row input[type="date"],
+.entry-form-row input[type="text"] {
+  min-height: 44px;
+  padding: 9px 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 0.9rem;
+  width: 100%;
+}
+.entry-form-row select:disabled { opacity: 0.6; }
+.entry-form-row textarea {
+  min-height: 84px;
+  padding: 9px 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  width: 100%;
+  resize: vertical;
+}
+.entry-form-row textarea::placeholder { color: var(--text-muted); opacity: 0.5; }
+.remarks-row { margin-bottom: 0; }
+
+.entry-form-grid {
+  display: flex;
+  gap: 14px;
+}
+.entry-form-grid .entry-form-row {
+  flex: 1;
+  min-width: 0;
+}
+@media (max-width: 760px) {
+  .entry-form-grid {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+/* Label/value list — replaces a squeezed multi-column table for
+   Calibration info (interpolate.html), Reference Info and UUT Info
+   (database.js's saved-record detail view). Reads the same at any
+   width, so unlike a data table it never needs horizontal scroll. */
+.info-dl {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+}
+.info-dl-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 10px;
+  padding: 9px 0;
+  border-top: 1px solid var(--border);
+  align-items: baseline;
+}
+.info-dl-row:first-child { border-top: none; }
+.info-dl-row dt {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.info-dl-row dd {
+  margin: 0;
+  font-size: 0.92rem;
+  word-break: break-word;
+}
+.info-dl-row select {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+.info-dl-due {
+  margin-left: 8px;
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+.info-dl-due-safe { color: var(--ok); }
+/* Calibration info: a line per certificate held for the equipment. */
+.cert-line + .cert-line { margin-top: 6px; }
+/* The number on a line of its own, so a narrow screen never breaks it
+   or the date under it in two. */
+.cert-line-no { display: block; font-weight: 600; }
+.cert-line-meta { color: var(--text-muted); font-size: 0.85rem; }
+.info-dl-due-aware { color: var(--warn); }
+.info-dl-due-overdue { color: var(--err); }
+
+#add-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.interp-table-wrap {
+  overflow-x: auto;
+}
+.interp-table th:last-child, .interp-table td:last-child {
+  width: 34px;
+}
+.interp-table td input {
+  width: 100%;
+  min-width: 90px;
+  min-height: 44px;
+  padding: 6px 8px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 0.85rem;
+}
+
+/* Fainter than the browser default so "e.g. 100" reads as an example,
+   not a value that's already been typed in. */
+input[type="text"]::placeholder {
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+.interp-computed {
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.interp-computed.cell-error {
+  color: var(--err);
+  white-space: normal;
+}
+/* Correction Rdg vs. the configured tolerance — only applied once a
+   tolerance is actually filled in (see toleranceLimit() in
+   interpolate.js); left at the default muted color otherwise, not a
+   false pass/fail. */
+.interp-computed.tol-pass {
+  color: var(--ok);
+  font-weight: 600;
+}
+.interp-computed.tol-fail {
+  color: var(--err);
+  font-weight: 600;
+}
+/* The UUT reading behind an out-of-tolerance Correction Rdg. Its row
+   is tinted red already, so the box itself stays plain behind the
+   number and is picked out by its border. */
+.interp-table td input.tol-fail {
+  border-color: var(--err);
+  background: var(--bg);
+  color: var(--err);
+  font-weight: 600;
+}
+.interp-row-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: none;
+  border: none;
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0;
+}
+.interp-row-remove:hover { color: var(--err); }
+.interp-row-photo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0;
+}
+.interp-row-photo:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Reading photos (photos.js) — thumbnails on a worksheet row and in a
+   saved record's detail view, and the full-size view either opens. */
+.photo-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.photo-thumb {
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  overflow: hidden;
+  cursor: pointer;
+}
+.photo-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.photo-thumb img:not([src]) { visibility: hidden; }
+/* The picture couldn't be found (deleted from the phone's folder, say). */
+.photo-thumb-missing { border-style: dashed; cursor: default; }
+.photo-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 16px;
+  background: rgba(20, 19, 18, 0.92);
+}
+.photo-viewer img {
+  max-width: 100%;
+  max-height: calc(100% - 70px);
+  object-fit: contain;
+}
+.photo-viewer-actions {
+  display: flex;
+  gap: 10px;
+}
+.photo-viewer-actions button {
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: var(--radius);
+  border: 1px solid #f3f2f2;
+  background: transparent;
+  color: #f3f2f2;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.photo-viewer-actions .photo-viewer-delete { border-color: #ff90b1; color: #ff90b1; }
+/* A saved record's detail view (database.js): a reading that was out
+   of tolerance when saved, and the worksheet's remarks. */
+table.data-table tr.record-row-fail td { background: var(--err-bg); color: var(--err); font-weight: 600; }
+.record-remarks { margin: 0; font-size: 0.9rem; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere; }
+.record-photo-row { margin-bottom: 12px; }
+.record-photo-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Card-per-row, at every width — not just mobile. A 5-column table
+   with 3 of those columns read-only computed values is harder to scan
+   than it needs to be at any size: each <tr> is a flex row instead, the
+   two real inputs (Lab Rdg, UUT Rdg) stay big and side by side, and the
+   3 computed/read-only cells (same DOM, same order — CSS `order` only
+   changes where they PAINT, not the DOM addRow()/collectRowsData()
+   etc. rely on) drop to a compact second line via `order`, each
+   labelled by ::before since the column headers they'd normally sit
+   under are hidden here. */
+.interp-table, .interp-table thead, .interp-table tbody { display: block; width: 100%; }
+.interp-table thead { display: none; }
+.interp-table tbody { counter-reset: interp-row; }
+.interp-table tr {
+  counter-increment: interp-row;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 10px 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+/* Tolerance, shown on the whole row (interpolate.js's recompute): a
+   coloured bar down its left edge — green within, red out — and, out of
+   tolerance, a red tint behind everything so the row can't be missed
+   when scrolling a long table. The bar is an inset shadow, not a
+   border, so a row doesn't shift sideways as its verdict changes. */
+.interp-table tr.row-tol-pass { box-shadow: inset 4px 0 0 var(--ok); }
+.interp-table tr.row-tol-fail {
+  background: var(--err-bg);
+  box-shadow: inset 4px 0 0 var(--err);
+  border-bottom-color: var(--err);
+}
+.interp-table tr.row-tol-fail::before { color: var(--err); }
+/* The verdict in words, after the Correction Rdg it's about. */
+.interp-computed.tol-pass::after,
+.interp-computed.tol-fail::after {
+  margin-left: 8px;
+  padding: 2px 7px;
+  border-radius: var(--radius);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.interp-computed.tol-pass::after { content: "Within tolerance"; background: var(--ok-bg); color: var(--ok); }
+.interp-computed.tol-fail::after { content: "Out of tolerance"; background: var(--err); color: var(--err-bg); }
+.interp-table tr::before {
+  content: counter(interp-row, decimal-leading-zero);
+  order: 0;
+  flex: 0 0 auto;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+/* table.data-table.interp-table (both classes), not just .interp-table
+   — table.data-table's own td border/padding rule sits later in this
+   file and ties on specificity otherwise, so it would win regardless
+   of this rule's own position. */
+table.data-table.interp-table td {
+  border: none;
+  padding: 0;
+}
+/* flex-basis 0 (not a fixed 40%) — flex-wrap decides what fits on a
+   line using each item's hypothetical (pre-shrink) size, so a fixed
+   percentage basis made the browser wrap the remove button to its own
+   line the moment 2×40% + the row number + the button couldn't all
+   fit, even though the inputs had plenty of room left to shrink into.
+   Basis 0 + grow 1 starts both inputs at zero and lets them split
+   whatever room remains after the row number and button, so the
+   button always has a place on the same line. */
+.interp-table td:nth-child(1) { order: 1; flex: 1 1 0; min-width: 60px; max-width: 320px; }
+.interp-table td:nth-child(4) { order: 2; flex: 1 1 0; min-width: 60px; max-width: 320px; }
+.interp-table td:nth-child(6) { order: 4; flex: 0 0 auto; }
+/* Photo + remove buttons, side by side at the end of the input line. */
+.interp-table td.interp-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+/* The row's photos: a line of thumbnails under the computed values,
+   and nothing at all — no gap either — while the row has none. */
+.interp-table td.interp-row-photos {
+  order: 7;
+  flex: 1 1 100%;
+  width: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 6px 0 0 26px;
+}
+.interp-table td.interp-row-photos:empty { display: none; }
+@media (max-width: 760px) {
+  /* A phone's row is narrower than two 90px boxes plus the buttons:
+     the boxes shrink with their cells instead of spilling over each
+     other, and the row gives up some of its side padding to them. */
+  .interp-table tr { padding-left: 10px; padding-right: 4px; }
+  .interp-table td input { min-width: 0; }
+}
+/* Forces the computed cells below onto their own line even when the
+   row is wide enough that they'd otherwise fit alongside the inputs —
+   a zero-height, 100%-basis flex item is the standard way to insert a
+   line break into a wrapping flex row. */
+.interp-table tr::after {
+  content: "";
+  order: 4;
+  flex-basis: 100%;
+  height: 0;
+}
+.interp-table td:nth-child(2),
+.interp-table td:nth-child(3),
+.interp-table td:nth-child(5) {
+  order: 5;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 4px 0 0 26px;
+  font-size: 0.78rem;
+}
+.interp-table td:nth-child(2)::before { content: "Lab corr. "; }
+.interp-table td:nth-child(3)::before { content: "Act lab "; }
+.interp-table td:nth-child(5)::before { content: "Correction "; }
+
+/* A worksheet's reading tables (interpolate.js's createReadingTable):
+   one panel each, stacked, with what the table is read against and its
+   before/after-adjust mark in a strip above the rows. */
+.reading-tables {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+/* A worksheet's tables are side by side, one filling the page's width,
+   and swiped between (interpolate.js's pager). The row scrolls sideways
+   and snaps to a table; its height is set to the table that is showing.
+   The bar over it stays in view while the page scrolls, so it is always
+   clear which table is being filled in. */
+.reading-tables {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.reading-tables::-webkit-scrollbar { display: none; }
+.reading-tables > .reading-table {
+  flex: 0 0 100%;
+  min-width: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+/* A wide table scrolls sideways inside its own table; reaching its end
+   mustn't carry on into the next table. */
+.reading-tables .interp-table-wrap { overscroll-behavior-x: contain; }
+.table-pager {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  margin-bottom: -8px;
+  padding: 6px 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.table-pager button:disabled { opacity: 0.35; cursor: default; }
+.table-pager-middle {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+.table-pager-label { font-size: 0.85rem; font-weight: 600; }
+.table-pager-dots { display: flex; gap: 2px; }
+/* A dot is small; the button round it is what gets pressed. */
+.table-pager-dot {
+  width: 22px;
+  height: 14px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.table-pager-dot::before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: var(--border);
+}
+.table-pager-dot.active::before { background: var(--accent); }
+.reading-table .result-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.add-row-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+/* An icon button in a header's action slot is a 40px square; that
+   slot's own padding for text buttons would squeeze its icon. */
+.result-header-actions .history-item-btn { padding: 0; }
+.reading-table-setup {
+  padding-bottom: 2px;
+  border-bottom: 2px solid var(--line);
+}
+.reading-tables-footer .interp-note { margin-top: 10px; }
+
+/* Before adjust / After adjust — two checkboxes of which at most one is
+   ticked. Sized and spaced as things to press, not as form labels. */
+.stage-row-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.stage-checks {
+  display: flex;
+  gap: 8px;
+}
+/* Beside the two dropdowns on a wide page, the pair takes the room it
+   needs and no more — they're what stretch. */
+.entry-form-grid .stage-row { flex: 0 0 auto; }
+.entry-form-row .stage-check {
+  flex: 1 1 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 12px;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  white-space: nowrap;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  cursor: pointer;
+}
+.stage-check input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+.reading-table[data-stage="before"] .stage-check:has(input:checked) { border-color: var(--warn); background: var(--warn-bg); color: var(--warn); }
+.reading-table[data-stage="after"] .stage-check:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+/* The same mark as a label: beside a table's title on the worksheet,
+   and beside its heading in a saved record (database.js). */
+.stage-chip {
+  padding: 3px 8px;
+  border-radius: var(--radius);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.stage-chip-before { background: var(--warn-bg); color: var(--warn); }
+.stage-chip-after { background: var(--accent-soft); color: var(--accent); }
+.record-table-accuracy {
+  margin: -2px 0 8px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+.record-table-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.interp-note {
+  margin: 12px 0 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* The worksheet's Save bar stays at the foot of the view while the
+   page scrolls under it — above the bottom nav on a phone — so Save
+   and the overall result are always to hand on a long worksheet. */
+.tab-save-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  margin: 0 -8px;
+  padding: 10px 8px;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+/* The worksheet as a whole: pass or fail, and by how many readings. */
+.result-chip {
+  padding: 6px 10px;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+.result-chip-pass { background: var(--ok-bg); color: var(--ok); }
+.result-chip-fail { background: var(--err); color: var(--err-bg); }
+
+/* A section that folds under its heading (interpolate.js): the
+   chevron turns, everything but the heading goes, and the heading
+   gains a line saying what's inside. */
+.fold-heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  min-width: 0;
+}
+.section-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin: -4px -4px -4px -8px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.section-toggle svg { transition: transform 0.15s; }
+.section-toggle[aria-expanded="true"] svg { transform: rotate(90deg); }
+@media (prefers-reduced-motion: reduce) {
+  .section-toggle svg { transition: none; }
+}
+.section-summary {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+.section-collapsed > :not(.result-header) { display: none; }
+.section-collapsed > .result-header { margin-bottom: 0; }
+
+@media (max-width: 760px) {
+  /* Clear of the bottom nav, which is fixed over the foot of the page. */
+  .tab-save-bar { bottom: calc(60px + env(safe-area-inset-bottom)); gap: 8px; padding-top: 8px; padding-bottom: 8px; }
+  /* Kept short, since it's always on screen: the result on a line of its
+     own, then Save across the width with "Save as a new record" beside it. */
+  .result-chip { flex: 1 1 100%; padding: 4px 8px; font-size: 0.74rem; }
+  .tab-save-btn { flex: 1 1 auto; justify-content: center; min-height: 46px; font-size: 0.95rem; }
+  .tab-save-status { flex: 1 1 100%; }
+}
+
+.tab-save-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent);
+  background: var(--accent-fill);
+  color: var(--on-accent);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.tab-save-btn:hover { opacity: 0.92; }
+
+.tab-save-status {
+  font-size: 0.85rem;
+  color: var(--ok);
+}
+.tab-save-status.save-status-error { color: var(--err); }
+
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 36px 16px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  color: var(--text-muted);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.dropzone.dragover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.dropzone-icon {
+  font-size: 1.6rem;
+}
+
+/* Camera scanner (scanner.js). The stage is a dark surface in both
+   themes — it's a window onto the camera — so everything drawn over it
+   uses fixed light-on-dark colours (the dark theme's own accent/ok
+   values) instead of the theme variables. */
+.scanner-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  max-height: 460px;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: #141312;
+  color: #f3f2f2;
+  user-select: none;
+  -webkit-user-select: none;
+}
+/* Only while the camera is live: two fingers on the stage are a pinch
+   for the scanner's zoom, not the browser's page zoom or a scroll. */
+.scanner-stage[data-state="running"] { touch-action: none; }
+
+/* Full page while the camera is starting or live — the stage lifts out
+   of its place in the page and covers everything, nav included, then
+   drops back the moment scanner.js leaves those states. The page under
+   it is held still meanwhile (scanner.js sets .scanner-open). */
+.scanner-stage[data-state="starting"],
+.scanner-stage[data-state="running"] {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  width: auto;
+  max-height: none;
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+:root.scanner-open, :root.scanner-open body { overflow: hidden; }
+
+/* cover, not contain: the picture fills the stage edge to edge, and
+   scanner.js's highlight maths assumes exactly that. The transform it
+   sets (digital zoom) scales about the centre. */
+.scanner-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center;
+}
+.scanner-stage:not([data-state="running"]) .scanner-video { visibility: hidden; }
+
+/* Viewfinder — a guide for where to hold the code, not a limit: the
+   whole picture is scanned, not just what's inside the corners. Its
+   size is set by scanner.js (a square off the stage's shorter side). */
+.scanner-frame {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  display: none;
+  /* A dark edge around the white corners and the line, so they still
+     show when what's behind them is white paper. */
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.75));
+}
+.scanner-stage[data-state="running"] .scanner-frame { display: block; }
+.scanner-corner {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 0 solid #f3f2f2;
+}
+.scanner-corner-tl { left: 0; top: 0; border-left-width: 3px; border-top-width: 3px; }
+.scanner-corner-tr { right: 0; top: 0; border-right-width: 3px; border-top-width: 3px; }
+.scanner-corner-bl { left: 0; bottom: 0; border-left-width: 3px; border-bottom-width: 3px; }
+.scanner-corner-br { right: 0; bottom: 0; border-right-width: 3px; border-bottom-width: 3px; }
+.scanner-line {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 8%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--scan-accent) 20%, var(--scan-accent) 80%, transparent);
+  opacity: 0.85;
+  animation: scanner-sweep 2.4s ease-in-out infinite alternate;
+}
+@keyframes scanner-sweep {
+  from { top: 8%; }
+  to { top: 92%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scanner-line { animation: none; top: 50%; }
+}
+
+/* Box around a code that's been found but not read yet — positioned
+   by scanner.js; the short transition is what makes it glide between
+   frames instead of jumping. Turns green for the moment a read lands. */
+.scanner-highlight {
+  position: absolute;
+  border: 2px solid var(--scan-accent);
+  border-radius: 4px;
+  background: var(--scan-accent-soft);
+  pointer-events: none;
+  transition: left 90ms linear, top 90ms linear, width 90ms linear, height 90ms linear;
+}
+.scanner-highlight-success {
+  border-color: #5fd39a;
+  background: rgba(95, 211, 154, 0.28);
+  transition: none;
+}
+
+.scanner-zoom-badge, .scanner-hint {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(20, 19, 18, 0.72);
+  color: #f3f2f2;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.scanner-zoom-badge {
+  top: 12px;
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+}
+.scanner-hint { bottom: 14px; max-width: calc(100% - 132px); white-space: normal; text-align: center; }
+/* A code was read but isn't a certificate — the app's error colour. */
+.scanner-hint-rejected { background: rgba(170, 11, 86, 0.9); }
+
+.scanner-btn {
+  position: absolute;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgba(243, 242, 242, 0.35);
+  border-radius: 50%;
+  background: rgba(20, 19, 18, 0.6);
+  color: #f3f2f2;
+  cursor: pointer;
+}
+.scanner-stage[data-state="running"] .scanner-btn,
+.scanner-stage[data-state="starting"] .scanner-stop { display: flex; }
+.scanner-stop { top: 12px; }
+.scanner-torch { bottom: 12px; }
+.scanner-torch[aria-pressed="true"] {
+  background: #f0c26e;
+  border-color: #f0c26e;
+  color: #201e1d;
+}
+/* Low light and the torch is off — draws the eye to the button. */
+.scanner-btn-suggest { animation: scanner-pulse 1s ease-in-out infinite alternate; }
+@keyframes scanner-pulse {
+  from { box-shadow: 0 0 0 0 rgba(240, 194, 110, 0.9); }
+  to { box-shadow: 0 0 0 7px rgba(240, 194, 110, 0); }
+}
+
+/* Idle / starting / error — one of these covers the stage whenever
+   the camera isn't live. */
+.scanner-overlay {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px;
+  text-align: center;
+}
+.scanner-stage[data-state="idle"] .scanner-overlay-idle,
+.scanner-stage[data-state="starting"] .scanner-overlay-starting,
+.scanner-stage[data-state="error"] .scanner-overlay-error { display: flex; }
+.scanner-overlay p {
+  margin: 0;
+  max-width: 420px;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: #b9b5b4;
+}
+.scanner-overlay strong { font-size: 1rem; }
+.scanner-start-btn {
+  min-height: 44px;
+  padding: 0 22px;
+  border: 1px solid var(--scan-accent);
+  border-radius: var(--radius);
+  background: var(--scan-accent);
+  color: #141312;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 760px) {
+  /* A phone is held upright, and so is the picture its camera gives. */
+  .scanner-stage { aspect-ratio: 1; max-height: none; }
+}
+
+.camera-note {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.camera-note code {
+  background: var(--accent-soft);
+  padding: 1px 5px;
+  border-radius: var(--radius);
+}
+
+/* Scan section, collapsed — shown instead of the full scanner once the
+   active worksheet tab already has equipment selected, so the scanner
+   stops taking up space once it's done its job. */
+.scan-confirm {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+/* Explicit combinator, not just the bare .hidden rule above — equal
+   specificity would otherwise leave the winner decided by source
+   order, and .scan-confirm's own display:flex sits later in the file. */
+.scan-confirm.hidden { display: none; }
+.scan-confirm-icon {
+  flex-shrink: 0;
+  display: flex;
+}
+.scan-confirm-text {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+.scan-confirm-text strong { font-weight: 700; }
+.rescan-btn {
+  flex-shrink: 0;
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.scan-status-error { color: var(--err); }
+.scan-status-ok { color: var(--ok); }
+.scan-status-warn { color: var(--warn); }
+
+.result-panel.hidden, .error-panel.hidden { display: none; }
+
+.result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.result-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Baseline styling + touch sizing for every action button in this
+   slot (Download/Close on Records' detail view, Use in a worksheet on
+   Scans) — #save-data below overrides colors for its own accent look. */
+.result-header-actions button {
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+#save-data {
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.text-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 0.82rem;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.sort-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.sort-control select {
+  min-height: 40px;
+  padding: 5px 8px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 0.72rem;
+}
+
+.sort-dir-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.sort-dir-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.history-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--panel-shadow);
+  padding: 18px;
+}
+
+.history-count {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+
+.history-empty {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+}
+.history-item:last-child { border-bottom: none; }
+
+.history-item-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 4px 0;
+  min-height: 44px;
+  min-width: 0;
+}
+
+.history-item-id {
+  font-weight: 700;
+  color: var(--text);
+  font-size: 0.96rem;
+}
+
+.history-item-meta {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.history-item-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+/* Icon buttons (Download/Delete) — a real 40×40 tap target instead of
+   a small text link, since these sit right next to the row's own tap
+   target and a thumb needs to tell them apart reliably. */
+.history-item-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.history-item-btn-danger:hover {
+  border-color: var(--err);
+  color: var(--err);
+}
+
+.result-header h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.due-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.due-banner-icon { font-size: 1.1rem; line-height: 1; }
+.due-banner-overdue, .due-banner-danger { background: var(--err-bg); color: var(--err); }
+.due-banner-aware { background: var(--warn-bg); color: var(--warn); }
+.due-banner-safe { background: var(--ok-bg); color: var(--ok); }
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.summary-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+}
+
+.summary-label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.summary-value {
+  font-size: 0.98rem;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.table-block {
+  margin-bottom: 18px;
+  overflow-x: auto;
+}
+
+.table-block h3 {
+  font-size: 0.95rem;
+  margin: 0 0 8px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* table-layout:auto (not fixed) + width:100% as a floor, not a cap — a
+   table with few columns still stretches to fill its container, but one
+   with many columns (e.g. database.js's Reference Info table) grows
+   past 100% instead of squeezing every column down to illegibility.
+   Deliberately left as a normal table (no display:block/table override
+   on thead/tbody) so header and body cells share ONE column-width
+   computation — splitting them into separate table contexts made each
+   size its columns from only its own content (headers vs. values),
+   which drifted the header/body borders out of alignment. Scrolling
+   when the table does grow past 100% is handled by a wrapper
+   (.cert-info-wrap, .interp-table-wrap, .table-block) — never by the
+   table element itself. */
+table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  table-layout: auto;
+}
+
+table.data-table th, table.data-table td {
+  border: 1px solid var(--border);
+  padding: 6px 8px;
+  text-align: left;
+}
+
+table.data-table th {
+  background: var(--bg);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-top: none;
+  border-bottom: 2px solid var(--line);
+}
+
+table.data-table td {
+  font-variant-numeric: tabular-nums;
+}
+
+.update-restart-btn { margin-top: 12px; }
+
+/* Reading tables in an official worksheet's layout (worksheet-forms.js):
+   on a wide screen a real table, its headings grouped as on the paper
+   worksheet and wider than the page if it has to be (its wrapper
+   scrolls); on a phone each row is a card, every cell under its own
+   small label, four to a line. */
+.worksheet-type-row { max-width: 520px; margin-bottom: 0; }
+.form-table { width: 100%; border-collapse: collapse; }
+.form-table th {
+  padding: 6px 4px;
+  border: 1px solid var(--border);
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.66rem;
+  line-height: 1.25;
+}
+.form-table .form-units th {
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+}
+.form-table td {
+  padding: 3px;
+  border: 1px solid var(--border);
+  text-align: center;
+  vertical-align: middle;
+}
+.form-table td input,
+.form-table td select {
+  width: 100%;
+  min-width: 46px;
+  min-height: 40px;
+  padding: 6px 2px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.9rem;
+  text-align: center;
+}
+.form-table td.form-wide input,
+.form-table td.form-wide select { min-width: 150px; text-align: left; }
+.form-table .form-no {
+  color: var(--text-muted);
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  font-size: 0.78rem;
+}
+.form-table .form-calc {
+  min-width: 40px;
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+.form-table .cell-error { color: var(--err); font-size: 0.7rem; white-space: normal; }
+.form-table td.tol-pass { color: var(--ok); font-weight: 700; }
+.form-table td.tol-fail { background: var(--err-bg); color: var(--err); font-weight: 700; }
+.form-table tr.row-tol-fail .form-no { box-shadow: inset 3px 0 0 var(--err); color: var(--err); }
+.form-table tr.row-tol-pass .form-no { box-shadow: inset 3px 0 0 var(--ok); }
+.form-table .form-head-actions { border: none; background: none; }
+/* A section heading inside a row, and the labels and headings of a
+   row set out as a small table: for a phone only. */
+.form-table .form-group,
+.form-table .form-ph { display: none; }
+.form-table .form-actions { border: none; padding: 2px; }
+/* "Add a reading", under a worksheet-type table's rows. */
+.reading-table-footer { display: flex; margin-top: 12px; }
+.reading-table-footer button {
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.form-table .interp-row-photos { border: none; padding: 0 4px; }
+.form-table .interp-row-photos:empty { display: none; }
+.form-record td { font-family: ui-monospace, "SF Mono", Consolas, monospace; font-size: 0.82rem; white-space: nowrap; }
+/* On a wide screen the table is a grid like a spreadsheet's, and with
+   this many columns a box inside every cell only crowds it. So there
+   the cell is the box: an input has no border of its own and fills its
+   cell, a cell that is typed in is tinted (one that is worked out is
+   not), and the cell in use is outlined. Rows are as short as is still
+   comfortable to press. A phone keeps the boxes: its rows are cards,
+   with no grid to mark a field out. */
+@media (min-width: 761px) {
+  .form-table:not(.form-record) td.form-cell:not(.form-calc) {
+    padding: 0;
+    background: var(--bg);
+  }
+  .form-table:not(.form-record) td.form-cell input,
+  .form-table:not(.form-record) td.form-cell select {
+    display: block;
+    min-height: 44px;
+    padding: 6px 4px;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+  }
+  .form-table:not(.form-record) td.form-cell input:focus,
+  .form-table:not(.form-record) td.form-cell select:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+  /* The two row buttons side by side, small enough not to set the
+     height of the row. */
+  .form-table .form-actions { white-space: nowrap; padding: 0 0 0 4px; }
+  .form-table .form-actions button {
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+  }
+}
+/* On a phone a row is a card for one reading, laid out to be filled
+   in with a thumb rather than read across:
+     - a heading line: its number and unit, and its two buttons;
+     - sections under their own headings (Reference, the UUT's
+       readings, ...), as the paper worksheet groups its columns;
+     - readings three to a line, in boxes big enough to press;
+     - what is worked out (averages, corrected values) set apart from
+       what is typed: no box, a rule down its left side;
+     - each correction as a banner across the foot of the card, green
+       or red by the table's accuracy.
+   The grid is six columns: a third is two of them, a half three. */
+@media (max-width: 760px) {
+  .form-table:not(.form-record) { display: block; }
+  .form-table:not(.form-record) thead { display: none; }
+  .form-table:not(.form-record) tbody { display: block; }
+  .form-table .form-row {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px 8px;
+    align-items: end;
+    margin-top: 14px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+  }
+  .form-table .form-row.row-tol-fail { border-left-color: var(--err); }
+  .form-table .form-row.row-tol-pass { border-left-color: var(--ok); }
+  .form-table .form-row td {
+    display: block;
+    grid-column: span 2;
+    min-width: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    text-align: left;
+  }
+  .form-table .form-row td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 4px;
+    overflow: hidden;
+    color: var(--text-muted);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .form-table .form-row .form-w2,
+  .form-table .form-row .form-calc { grid-column: span 3; }
+  .form-table .form-row .form-w4,
+  .form-table .form-row .form-judge { grid-column: 1 / -1; }
+  .form-table .form-row td input,
+  .form-table .form-row td select {
+    min-width: 0;
+    min-height: 48px;
+    padding: 8px 6px;
+    background: var(--panel);
+    font-size: 1.02rem;
+  }
+
+  /* The heading line: "No. 01 in bar" on the left, the buttons on the
+     right, a rule under both. */
+  .form-table .form-row .form-no {
+    grid-column: 1 / 5;
+    grid-row: 1;
+    align-self: center;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    box-shadow: none;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  .form-table .form-row.row-tol-fail .form-no,
+  .form-table .form-row.row-tol-pass .form-no { box-shadow: none; color: var(--text); }
+  .form-table .form-row .form-no::before {
+    display: inline;
+    margin: 0;
+    overflow: visible;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .form-table .form-row .form-no::after {
+    content: attr(data-unit);
+    color: var(--text-muted);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+  .form-table .form-row .form-actions {
+    grid-column: 5 / -1;
+    grid-row: 1;
+    align-self: center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* A section's heading, with a rule over it. */
+  .form-table .form-row .form-group {
+    display: block;
+    grid-column: 1 / -1;
+    margin-top: 2px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* Worked out, not typed: the figure under its label, no box. */
+  .form-table .form-row .form-calc {
+    min-width: 0;
+    min-height: 48px;
+    padding-left: 10px;
+    border-left: 2px solid var(--border);
+    font-size: 1rem;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+  .form-table .form-row .form-calc.cell-error { font-size: 0.78rem; font-weight: 400; }
+
+  /* A correction: a banner, its label on the left and its figure on
+     the right. */
+  .form-table .form-row .form-judge {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 50px;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--panel);
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+  .form-table .form-row .form-judge::before { margin: 0; font-size: 0.72rem; }
+  .form-table .form-row .form-judge.tol-pass { border-color: var(--ok); background: var(--ok-bg); color: var(--ok); }
+  .form-table .form-row .form-judge.tol-fail { border-color: var(--err); background: var(--err-bg); color: var(--err); }
+  .form-table .form-row .form-judge.tol-pass::before,
+  .form-table .form-row .form-judge.tol-fail::before { color: inherit; }
+
+  .form-table .form-row .interp-row-photos { grid-column: 1 / -1; }
+  .form-table .form-row .form-actions::before,
+  .form-table .form-row .form-group::before,
+  .form-table .form-row .interp-row-photos::before { content: none; }
+
+  /* A row set out as a small ruled table (a shape with `phone`,
+     worksheet-forms.js): a line per reading down the left, a column
+     per set of readings across the top, and each cell in the place
+     its --gr / --gc say. The cells are the boxes, as on a wide
+     screen: one that is typed in is tinted, one that is worked out
+     is not, and a correction is green or red. */
+  .form-table .form-row.form-grid {
+    grid-template-columns: minmax(60px, max-content) repeat(var(--form-cols), minmax(0, 1fr));
+    gap: 0;
+    align-items: stretch;
+    background: none;
+  }
+  .form-table .form-row.form-grid .form-no,
+  .form-table .form-row.form-grid .form-actions {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    margin-bottom: 10px;
+  }
+  .form-table .form-row.form-grid .form-actions { justify-self: end; }
+  .form-table .form-row.form-grid .form-group { display: none; }
+  .form-table .form-row.form-grid td.form-cell,
+  .form-table .form-row.form-grid td.form-ph {
+    grid-row: var(--gr);
+    grid-column: var(--gc) / span var(--gs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    margin: 0 -1px -1px 0;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 0;
+    font-size: 1rem;
+    text-align: center;
+  }
+  .form-table .form-row.form-grid td.form-cell::before { content: none; }
+  .form-table .form-row.form-grid td.form-ph {
+    justify-content: flex-start;
+    padding: 4px 6px;
+    color: var(--text-muted);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-align: left;
+    text-transform: uppercase;
+  }
+  .form-table .form-row.form-grid td.form-ph-head { justify-content: center; color: var(--text); text-align: center; }
+  .form-table .form-row.form-grid td.form-ph::before { content: none; }
+  .form-table .form-row.form-grid td.form-cell:not(.form-calc) { background: var(--bg); }
+  .form-table .form-row.form-grid td input,
+  .form-table .form-row.form-grid td select {
+    min-height: 46px;
+    padding: 6px 4px;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    text-align: center;
+  }
+  .form-table .form-row.form-grid td input:focus,
+  .form-table .form-row.form-grid td select:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .form-table .form-row.form-grid td.form-calc { padding: 4px 2px; font-size: 0.9rem; font-weight: 600; }
+  .form-table .form-row.form-grid td.form-calc.cell-error { font-size: 0.74rem; font-weight: 400; }
+  .form-table .form-row.form-grid td.form-judge { font-size: 0.95rem; font-weight: 700; }
+  .form-table .form-row.form-grid td.form-judge.tol-pass { border-color: var(--border); }
+  .form-table .form-row.form-grid td.form-judge.tol-fail { border-color: var(--border); }
+  .form-table .form-row.form-grid .interp-row-photos { margin-top: 10px; }
+}
+/* Settings: the theme picker (settings.js). A card per theme, each
+   holding a small sample of it: the sample carries data-palette, so
+   the variables inside it are that theme's — in its dark half on a
+   dark page — whatever the page itself is wearing. The card round it
+   stays in the page's own theme. */
+.palette-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  gap: 8px;
+}
+.palette-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding: 6px 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.palette-card[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.palette-sample {
+  display: block;
+  padding: 7px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  font-family: var(--font-body);
+  text-align: left;
+}
+.palette-sample-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px 7px 7px;
+  border: 1px solid var(--border);
+  border-top-color: var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--panel-shadow);
+}
+.palette-sample-title {
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1;
+}
+.palette-sample-text {
+  width: 80%;
+  height: 3px;
+  background: var(--text-muted);
+}
+.palette-sample-button {
+  width: 55%;
+  height: 11px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent-fill);
+}
+/* The last thing in its card: nothing under it to keep clear of. */
+.setting-mode-row,
+.setting-mode-row .input-tabs { margin-bottom: 0; }
+
+/* Settings: technician and people (settings.js). */
+.setting-hint { margin: 2px 0 0; }
+.people-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.people-empty { font-size: 0.85rem; color: var(--text-muted); }
+/* The same names as buttons (lablog.js): one press puts the name in
+   the "Taken by" box. */
+.people-pick:empty { display: none; }
+.people-pick-btn {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.people-pick-btn[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.people-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding-left: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  font-size: 0.88rem;
+}
+.people-chip button {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.people-chip button:hover { color: var(--err); }
+.people-add {
+  display: flex;
+  gap: 8px;
+}
+.people-add input { flex: 1; min-width: 0; }
+.setting-days-row { margin-bottom: 0; }
+.setting-days {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+.entry-form-row .setting-days input { width: 84px; }
+
+/* Backup (settings.js): the two buttons side by side, stacked on a phone. */
+.backup-intro { margin-top: 0; }
+.backup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+.backup-restore-btn {
+  min-height: 46px;
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+#backup-now:disabled { opacity: 0.6; cursor: default; }
+
+/* Scans page: a saved scan whose calibration has gone past its date. */
+.scan-due-flag {
+  padding: 2px 7px;
+  border-radius: var(--radius);
+  background: var(--err-bg);
+  color: var(--err);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* The box that asks for an update when the app is opened (updater.js).
+   Over everything, the scanner's full-page camera included. */
+.update-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(20, 19, 18, 0.6);
+}
+.update-dialog {
+  width: 100%;
+  max-width: 420px;
+  padding: 22px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+.update-dialog h2 {
+  margin: 0 0 10px;
+  font-size: 1.25rem;
+}
+.update-dialog p {
+  margin: 0 0 18px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.update-dialog-progress {
+  height: 6px;
+  margin-bottom: 18px;
+  border-radius: 3px;
+  background: var(--border);
+  overflow: hidden;
+}
+.update-dialog-progress span {
+  display: block;
+  height: 100%;
+  background: var(--accent-fill);
+  transition: width 0.2s;
+}
+.update-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.update-dialog-actions button {
+  flex: 1 1 auto;
+  min-height: 48px;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.update-dialog-actions .update-dialog-primary {
+  border-color: var(--accent);
+  background: var(--accent-fill);
+  color: var(--on-accent);
+}
+
+.storage-stats {
+  display: flex;
+  flex-direction: column;
+}
+
+.storage-stat-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+.storage-stat-row:last-child { border-bottom: none; }
+
+/* Lab Log page (lablog.js) — in/out time stamps, one block per day. */
+.lab-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.lab-return-btn { min-height: 40px; }
+.lab-status { min-height: 1.3em; font-size: 0.85rem; }
+.lab-manual { margin-top: 12px; }
+.lab-manual summary {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  color: var(--accent);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.lab-manual form { margin-top: 10px; }
+
+/* .folder-group/.folder-header: the same block-with-a-heading on the
+   Records page (database.js), one per customer folder. */
+.lab-day, .folder-group { margin-bottom: 18px; }
+.lab-day:last-child, .folder-group:last-child { margin-bottom: 0; }
+.lab-day-header, .folder-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--line);
+}
+.lab-day-header h3, .folder-header h3 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.lab-event { justify-content: flex-start; }
+.lab-event-time {
+  flex-shrink: 0;
+  min-width: 4.6em;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.lab-badge {
+  flex-shrink: 0;
+  width: 40px;
+  padding: 3px 0;
+  border-radius: var(--radius);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.lab-badge-out { background: var(--warn-bg); color: var(--warn); }
+.lab-badge-in { background: var(--ok-bg); color: var(--ok); }
+#share-log:disabled { opacity: 0.5; cursor: default; }
+#clear-log { padding: 0; }
+
+/* A day that folds (lablog.js, sharelog.js): its heading is one wide
+   button — a chevron that turns when it's open, the date, and a line
+   saying what's inside for when it's shut. */
+.day-heading {
+  flex: 1;
+  min-width: 0;
+}
+.day-toggle {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  width: 100%;
+  min-height: 44px;
+  padding: 4px 0;
+  background: none;
+  border: none;
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+.day-toggle svg {
+  flex-shrink: 0;
+  color: var(--text-muted);
+  transition: transform 0.15s;
+}
+.day-toggle[aria-expanded="true"] svg { transform: rotate(90deg); }
+@media (prefers-reduced-motion: reduce) {
+  .day-toggle svg { transition: none; }
+}
+.day-toggle-summary {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+/* Something from that day hasn't come back. */
+.day-toggle-flag {
+  padding: 2px 7px;
+  border-radius: var(--radius);
+  background: var(--warn-bg);
+  color: var(--warn);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+/* A folded day is a single line, not a heading over a ruled-off gap. */
+.lab-day:has(.day-toggle[aria-expanded="false"]) { margin-bottom: 6px; }
+.lab-day:has(.day-toggle[aria-expanded="false"]) .lab-day-header { border-bottom: 1px solid var(--border); }
+
+/* Shared Log (sharelog.js): one line per share, opening onto what was
+   in it. */
+.share-badge {
+  width: auto;
+  padding: 3px 7px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.share-badge-lablog { background: var(--warn-bg); color: var(--warn); }
+.share-entry { border-bottom: 1px solid var(--border); }
+.share-entry:last-child { border-bottom: none; }
+.share-entry .history-item { border-bottom: none; }
+.share-entry-toggle { flex: 1; }
+.share-entry-body {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  font-size: 0.85rem;
+}
+.share-entry-line { margin: 0 0 6px; color: var(--text-muted); overflow-wrap: anywhere; }
+.share-entry-items { margin: 0; padding-left: 22px; line-height: 1.5; }
+.share-entry-text {
+  margin: 0;
+  font-family: ui-monospace, "SF Mono", Consolas, monospace;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Home page (home.js). */
+.home-backup { margin-bottom: 0; }
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.home-action {
+  flex: 1 1 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+.home-action-primary { border-color: var(--accent); background: var(--accent-fill); color: var(--on-accent); }
+.home-section-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  min-height: 40px;
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.home-item { justify-content: flex-start; }
+.home-link { color: inherit; text-decoration: none; }
+/* A flag beside a list item's name (Home, Lab Log): out too long,
+   calibration due. */
+.item-flag {
+  display: inline-block;
+  margin: 1px 0 1px 8px;
+  padding: 2px 7px;
+  border-radius: var(--radius);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.item-flag-err { background: var(--err-bg); color: var(--err); }
+.item-flag-warn { background: var(--warn-bg); color: var(--warn); }
+.home-more {
+  display: block;
+  padding-top: 10px;
+  color: var(--accent);
+  font-size: 0.82rem;
+}
+/* Scans page: still valid, but due within the month. */
+.scan-due-soon { background: var(--warn-bg); color: var(--warn); }
+
+/* A search box over a list (Records, Scans). */
+.list-search {
+  width: 100%;
+  min-height: 44px;
+  margin-bottom: 10px;
+  padding: 9px 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+/* Pass / Fail beside a record's name. */
+.record-result {
+  margin-left: 8px;
+  padding: 2px 7px;
+  border-radius: var(--radius);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.record-result-pass { background: var(--ok-bg); color: var(--ok); }
+.record-result-fail { background: var(--err); color: var(--err-bg); }
+.record-folder-row { max-width: 420px; }
+.record-folder-row label { display: flex; flex-direction: column; gap: 6px; }
+
+/* Records page: the tick boxes that choose what "Share selected" sends —
+   one per record, and one per folder for everything in it. */
+.record-tick {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.folder-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  cursor: pointer;
+}
+#share-selected { white-space: nowrap; }
+#share-selected:disabled { opacity: 0.5; cursor: default; }
+/* A header's buttons go onto a second line on a phone rather than
+   squeezing each other's words into a column. */
+.result-header-actions { flex-wrap: wrap; }
+
+/* Converter page (converter.js) — a two-column grid, one row per
+   box: what it is on the left, the box (or the signal drop-down) on
+   the right. Capped in width so the pair stays together on a wide
+   screen; half each on a phone. */
+.conv-rows {
+  display: grid;
+  grid-template-columns: minmax(0, 240px) minmax(0, 280px);
+  gap: 10px 14px;
+  align-items: center;
+}
+.conv-row-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+/* Check points table: short numeric columns, so no wrapping inside a
+   cell or heading — it scrolls in its wrapper if it ever runs wide.
+   The unit in the heading is kept out of the capitals, like the labels. */
+#conv-check-table th, #conv-check-table td { white-space: nowrap; }
+#conv-check-table th { text-transform: none; }
+/* The "(at 4 mA)" part of a limit's label — kept out of the capitals. */
+.conv-row-at {
+  text-transform: none;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+.conv-row-select,
+.conv-field input[type="text"] {
+  min-height: 44px;
+  padding: 9px 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 0.9rem;
+  width: 100%;
+}
+.conv-field { position: relative; }
+/* Room on the right for the unit, which sits inside the field. */
+.conv-field input[type="text"] {
+  padding-right: 54px;
+  font-variant-numeric: tabular-nums;
+}
+.conv-field input[type="text"]:disabled { opacity: 0.5; }
+.conv-field-unit {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 44px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+/* Holds a full folder path, which has no spaces to wrap at. */
+.storage-location-note { overflow-wrap: anywhere; }
+
+.error-panel {
+  border-color: var(--err);
+  background: var(--err-bg);
+}
+
+#error-text {
+  margin: 0;
+  color: var(--err);
+  font-size: 0.9rem;
+}
+
+.raw-toggle {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: var(--accent);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+}
+
+pre.raw-json {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px;
+  font-size: 0.78rem;
+  overflow-x: auto;
+  margin-top: 8px;
+}
