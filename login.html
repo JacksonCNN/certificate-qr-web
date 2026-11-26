@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign in — Certificate QR Decoder</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="theme.js"></script>
+  <script src="sidebar.js"></script>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0088b0" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Certificate QR" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+</head>
+<body class="login-body">
+  <main class="login-main">
+    <div class="login-card">
+      <div class="login-brand">
+        <svg class="app-icon" width="40" height="40" viewBox="0 0 30 30" aria-hidden="true">
+          <g transform="translate(-1.6,1.2)" fill="var(--accent)"><path d="M0 0h30v4H0zM0 26h30v4H0zM0 0h4v30H0zM26 0h4v30h-4z"/><path d="M11 11h8v8h-8z"/></g>
+          <g transform="translate(1.6,-1.2)" fill="var(--err)"><path d="M0 0h30v4H0zM0 26h30v4H0zM0 0h4v30H0zM26 0h4v30h-4z"/><path d="M11 11h8v8h-8z"/></g>
+          <g fill="var(--text)"><path d="M0 0h30v4H0zM0 26h30v4H0zM0 0h4v30H0zM26 0h4v30h-4z"/><path d="M11 11h8v8h-8z"/></g>
+        </svg>
+        <span>Certificate QR</span>
+      </div>
+      <h1 id="login-title" class="login-title">Sign in</h1>
+      <p id="login-subtitle" class="login-subtitle"></p>
+      <p id="login-note" class="login-note hidden" role="status"></p>
+
+      <!-- Accounts that have signed in on this phone (login.js). -->
+      <div id="login-choose" class="hidden">
+        <ul id="login-accounts" class="login-accounts"></ul>
+        <button type="button" id="login-add" class="login-row-btn login-add">
+          <span class="login-add-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3.1-6 7-6s7 2 7 6"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="16" y1="11" x2="22" y2="11"/></svg></span>
+          <span>Use another account</span>
+        </button>
+      </div>
+
+      <!-- The password for one of them. -->
+      <form id="login-unlock" class="hidden" novalidate>
+        <button type="button" id="login-who" class="login-who" title="Choose another account">
+          <span class="login-avatar" id="login-who-avatar" aria-hidden="true"></span>
+          <span class="login-who-text">
+            <span class="login-who-name" id="login-who-name"></span>
+            <span class="login-who-meta" id="login-who-meta"></span>
+          </span>
+          <svg class="login-who-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="entry-form-row">
+          <label for="login-unlock-password">Password</label>
+          <input type="password" id="login-unlock-password" autocapitalize="off" autocomplete="current-password" spellcheck="false" />
+        </div>
+        <label class="setting-check login-remember"><input type="checkbox" id="login-unlock-remember" /> Remember me</label>
+        <button type="submit" id="login-unlock-submit" class="tab-save-btn login-submit">Sign in</button>
+      </form>
+
+      <!-- Signing in an account new to this phone. -->
+      <div id="login-new" class="hidden">
+        <!-- An invite QR from an admin, or a sign-in QR from this
+             person's other phone (scanner.js; .scanner-compact: only the
+             live camera takes the whole page). -->
+        <div class="scanner scanner-compact login-scanner" id="login-scanner">
+          <div class="scanner-stage" data-role="stage" data-state="idle">
+            <video class="scanner-video" data-role="video" playsinline muted></video>
+            <div class="scanner-highlight hidden" data-role="highlight"></div>
+            <div class="scanner-frame" data-role="frame" aria-hidden="true">
+              <span class="scanner-corner scanner-corner-tl"></span>
+              <span class="scanner-corner scanner-corner-tr"></span>
+              <span class="scanner-corner scanner-corner-bl"></span>
+              <span class="scanner-corner scanner-corner-br"></span>
+              <span class="scanner-line"></span>
+            </div>
+            <div class="scanner-zoom-badge hidden" data-role="zoom-badge"></div>
+            <div class="scanner-hint hidden" data-role="hint" role="status"></div>
+            <button type="button" class="scanner-btn scanner-stop" data-role="stop" title="Stop camera" aria-label="Stop camera">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+            </button>
+            <button type="button" class="scanner-btn scanner-torch hidden" data-role="torch" title="Torch" aria-label="Torch" aria-pressed="false">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8l-1.5 5h-5z"/><path d="M9.5 8v11a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V8"/><line x1="12" y1="12" x2="12" y2="15"/></svg>
+            </button>
+            <div class="scanner-overlay scanner-overlay-idle">
+              <button type="button" class="scanner-start-btn scanner-icon-btn" data-role="start" title="Scan QR to sign in" aria-label="Scan QR to sign in"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V5a1 1 0 0 1 1-1h3"/><path d="M16 4h3a1 1 0 0 1 1 1v3"/><path d="M20 16v3a1 1 0 0 1-1 1h-3"/><path d="M8 20H5a1 1 0 0 1-1-1v-3"/><line x1="4" y1="12" x2="20" y2="12"/></svg></button>
+              <p class="login-scan-text"><strong>Scan QR to sign in</strong><span>An invite from your admin, or a sign-in QR from your other phone</span></p>
+            </div>
+            <div class="scanner-overlay scanner-overlay-starting">
+              <p>Starting camera…</p>
+            </div>
+            <div class="scanner-overlay scanner-overlay-error" role="alert">
+              <strong data-role="error-title"></strong>
+              <p data-role="error-text"></p>
+              <button type="button" class="scanner-start-btn" data-role="start">Try again</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="login-or" aria-hidden="true"><span>or</span></div>
+
+        <form id="login-form" novalidate>
+          <div id="login-server-summary" class="login-server-summary hidden">
+            <span>Server <strong id="login-server-host"></strong></span>
+            <button type="button" id="login-server-change" class="login-link">Change</button>
+          </div>
+          <div class="entry-form-row" id="login-server-row">
+            <label for="login-server">Server address</label>
+            <input type="text" id="login-server" inputmode="url" placeholder="https://certqr.example.com" autocapitalize="off" autocomplete="url" spellcheck="false" />
+          </div>
+          <div class="entry-form-row">
+            <label for="login-id">Login ID</label>
+            <input type="text" id="login-id" placeholder="e.g. ahmad" autocapitalize="off" autocomplete="username" spellcheck="false" />
+          </div>
+          <div class="entry-form-row">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" autocapitalize="off" autocomplete="current-password" spellcheck="false" />
+          </div>
+          <label class="setting-check login-remember"><input type="checkbox" id="login-remember" checked /> Remember me</label>
+          <button type="submit" id="login-submit" class="tab-save-btn login-submit">Sign in</button>
+          <p id="login-first-hint" class="camera-note login-hint hidden">What's already on this phone is added to your team's shared data when you sign in. Nothing is deleted.</p>
+        </form>
+        <button type="button" id="login-back" class="login-link login-back hidden">Back to accounts on this phone</button>
+      </div>
+
+      <!-- An invite scanned or pasted: the person chooses their password. -->
+      <form id="login-invite" class="hidden" novalidate>
+        <p id="login-invite-text" class="login-invite-text"></p>
+        <div class="entry-form-row">
+          <label for="login-invite-password">Choose a password</label>
+          <input type="password" id="login-invite-password" autocomplete="new-password" />
+        </div>
+        <div class="entry-form-row">
+          <label for="login-invite-repeat">The same password again</label>
+          <input type="password" id="login-invite-repeat" autocomplete="new-password" />
+          <p class="camera-note setting-hint">At least 8 characters.</p>
+        </div>
+        <label class="setting-check login-remember"><input type="checkbox" id="login-invite-remember" checked /> Remember me</label>
+        <button type="submit" id="login-invite-submit" class="tab-save-btn login-submit">Join</button>
+        <button type="button" id="login-invite-cancel" class="login-link login-back">Cancel</button>
+      </form>
+    </div>
+    <p class="login-foot" id="login-foot"></p>
+  </main>
+
+  <script src="history.js"></script>
+  <script src="version.js"></script>
+  <script src="github-token.js"></script>
+  <script src="updater.js"></script>
+  <script src="vendor/jsQR.js"></script>
+  <script src="vendor/zxing-reader.js"></script>
+  <script src="qr-decode.js"></script>
+  <script src="scanner.js"></script>
+  <script src="account-ui.js"></script>
+  <script src="login.js"></script>
+  <script src="web-app.js"></script>
+</body>
+</html>
